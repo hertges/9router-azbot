@@ -42,7 +42,10 @@ RUN chmod +x /entrypoint-combined.sh \
     && chown -R node:node /app/azbot /app/azbot-venv
 
 # Low-RAM defaults for a 0.5-1 GB box. Override in Sevalla dashboard.
-ENV QUEUE_WORKERS=1 \
+# Venv bin on PATH so `shutil.which` finds gallery-dl/yt-dlp; entrypoint.sh
+# re-exports the same for the runtime supervisor.
+ENV PATH="/app/azbot-venv/bin:$PATH" \
+    QUEUE_WORKERS=1 \
     UPLOAD_WORKERS=1 \
     DRIVE_UPLOAD_CONCURRENCY=1 \
     HANDLER_WORKERS=8 \

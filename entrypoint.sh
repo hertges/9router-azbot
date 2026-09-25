@@ -14,6 +14,10 @@ fi
 mkdir -p /app/azbot/downloads
 chown -R node:node /app/data /app/azbot 2>/dev/null || true
 
+# CLI tools (gallery-dl, yt-dlp) install into the venv's bin dir, which is
+# NOT on the default PATH — the bot finds them via shutil.which, so prepend it.
+export PATH="/app/azbot-venv/bin:$PATH"
+
 # AzBot supervisor: restart on crash/exit. If API_ID/API_HASH/BOT_TOKEN are
 # missing it exits(1) here until you set them in the Sevalla dashboard.
 # Uses the venv interpreter (python 3.12) — system python3 is 3.14, which
