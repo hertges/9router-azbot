@@ -20,9 +20,9 @@ single lowest-spec Sevalla instance (0.5 vCPU / 1 GB).
 1. Dashboard → **Applications → Create → Application** from this repo.
    Build strategy: **Dockerfile**, path `Dockerfile`, context repo root.
 2. Instance: smallest available (Hobby / 0.5 CPU · 1 GB).
-3. Add a **persistent disk**, mount path `/app/data`.
-   9Router keeps its SQLite DB at `/app/data/db`;
-   AzBot settings/cookies/indexes live at `/app/data/azbot`.
+3. Disk optional — skipped per your choice. Without it `/app/data`
+   is ephemeral: redeploy wipes 9Router DB + AzBot settings/cookies.
+   Env-based auth (BOT_TOKEN, Drive) survives; chat settings don't.
 4. Set env vars from `sevalla.env.example`:
    required: `API_ID`, `API_HASH`, `BOT_TOKEN`, `INITIAL_PASSWORD`.
    Do NOT set `PORT` — Sevalla injects it.
