@@ -1,0 +1,9 @@
+.env
+data/
+downloads/
+__pycache__/
+*.pyc
+*.session
+*.session-journal
+*.pickle
+token.pickle

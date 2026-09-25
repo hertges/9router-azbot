@@ -1,0 +1,23 @@
+# ── Telegram MTProto core ────────────────────────────────────────────────
+# pyrogram 2.x is the API this whole codebase is written against (HTML
+# parse_mode on Client, filters.command, raw upload.SaveBigFilePart striped
+# uploads). 2.0.106 is the final upstream release (project archived), so
+# >=2.0.106 resolves to exactly it today; the <3 cap only guards against a
+# future incompatible major rewrite silently breaking the bot.
+pyrogram>=2.0.106,<3
+# Native crypto accelerator for pyrogram (1.2.5 is the last upstream
+# release). The bot self-tests it at every startup (crypto_guard.py) and
+# falls back to pure-Python crypto automatically if a build ever misbehaves.
+tgcrypto>=1.2.5,<2
+
+# ── Downloaders (deliberately UNPINNED — near-daily fixes upstream) ──────
+# NOT auto-updated at runtime (removed): `pip install -U yt-dlp` in the
+# image / a bot restart is the update path.
+yt-dlp
+gallery-dl
+
+# ── Support libs (stable public APIs; always current via pip) ────────────
+requests
+python-dotenv
+google-api-python-client
+google-auth
