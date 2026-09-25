@@ -16,9 +16,11 @@ chown -R node:node /app/data /app/azbot 2>/dev/null || true
 
 # AzBot supervisor: restart on crash/exit. If API_ID/API_HASH/BOT_TOKEN are
 # missing it exits(1) here until you set them in the Sevalla dashboard.
+# Uses the venv interpreter (python 3.12) — system python3 is 3.14, which
+# pyrogram 2.x cannot import on.
 (
 while true; do
-    python3 /app/azbot/bot.py || true
+    su-exec node /app/azbot-venv/bin/python /app/azbot/bot.py || true
     echo "[azbot] exited, restarting in 15s..."
     sleep 15
 done
@@ -26,4 +28,4 @@ done
 
 # 9Router in foreground. Next standalone honors $PORT, which Sevalla injects.
 cd /app
-exec node custom-server.js
+exec su-exec node node custom-server.js

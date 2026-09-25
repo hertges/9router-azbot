@@ -5,10 +5,11 @@
 # >=2.0.106 resolves to exactly it today; the <3 cap only guards against a
 # future incompatible major rewrite silently breaking the bot.
 pyrogram>=2.0.106,<3
-# Native crypto accelerator for pyrogram (1.2.5 is the last upstream
-# release). The bot self-tests it at every startup (crypto_guard.py) and
-# falls back to pure-Python crypto automatically if a build ever misbehaves.
-tgcrypto>=1.2.5,<2
+# tgcrypto is NOT pinned here: 1.2.5 (last upstream release) has no cp312
+# musllinux wheels and cannot build on python 3.14. The Dockerfile tries a
+# best-effort `pip install tgcrypto` (source build) and continues without it
+# on failure — crypto_guard.py self-tests at every startup and falls back to
+# pure-Python crypto automatically. Worst case = slower crypto, never a crash.
 
 # ── Downloaders (deliberately UNPINNED — near-daily fixes upstream) ──────
 # NOT auto-updated at runtime (removed): `pip install -U yt-dlp` in the
