@@ -6,7 +6,9 @@
 # system python is 3.14, which pyrogram 2.x cannot import on
 # (asyncio.get_event_loop removal) — so AzBot brings its own Python 3.12
 # via uv-managed interpreter + venv. AzBot requirements adjusted to match.
-FROM decolua/9router:0.5.86
+FROM decolua/9router:latest
+# Designed/tested base: 0.5.86 (2026-09-25). :latest floats — if a rebuild
+# breaks, pin back to the tested tag above.
 
 USER root
 

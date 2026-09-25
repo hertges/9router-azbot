@@ -4,7 +4,8 @@
 single lowest-spec Sevalla instance (0.5 vCPU / 1 GB).
 
 - **9Router** runs in the foreground and owns `$PORT` (Sevalla health probe).
-  Base image `decolua/9router:0.5.86` — untouched, no Node build on deploy.
+  Base image `decolua/9router:latest` — untouched, no Node build on deploy.
+  Tested base noted in the Dockerfile; pin back to it if a rebuild breaks.
 - **AzBot** (`azbot/`, fixed Sep-12 build, same code as `hertges/AzBot`)
   runs beside it under a restart supervisor, on its own Python 3.12 venv
   (see "AzBot adaptations" below). Bot code is unmodified.
@@ -72,7 +73,8 @@ gets a small box OOM-killed.
 
 ## Updating
 
-- 9Router: bump the `FROM decolua/9router:X.Y.Z` tag, redeploy.
+- 9Router: image floats on `:latest` (tested base in Dockerfile comments).
+  Redeploy to pick up upstream; pin back to the tested tag if it breaks.
 - AzBot: to update, copy fresh files from `hertges/AzBot` into `azbot/`
   (keep this repo's `azbot/requirements.txt` tgcrypto change — see above).
   Never commit `.env`, `data/`, `downloads/`, `*.session` — all gitignored.
