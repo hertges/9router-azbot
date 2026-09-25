@@ -18,7 +18,7 @@ chown -R node:node /app/data /app/azbot 2>/dev/null || true
 # missing it exits(1) here until you set them in the Sevalla dashboard.
 (
 while true; do
-    su-exec node python3 /app/azbot/bot.py || true
+    python3 /app/azbot/bot.py || true
     echo "[azbot] exited, restarting in 15s..."
     sleep 15
 done
@@ -26,4 +26,4 @@ done
 
 # 9Router in foreground. Next standalone honors $PORT, which Sevalla injects.
 cd /app
-exec su-exec node node custom-server.js
+exec node custom-server.js
